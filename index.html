@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Chama Thakur!</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); overflow-x: hidden; scroll-behavior: smooth; }
+        .page { min-height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 20px 0; }
+        
+        /* Music Button */
+        .music-control { position: fixed; top: 20px; right: 20px; z-index: 1000; }
+        button { background: #d81b60; color: white; border: none; padding: 12px 25px; border-radius: 30px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; z-index: 10; }
+        button:hover { transform: scale(1.1); background: #ad1457; }
+
+        /* Headlines */
+        h1 { color: #d81b60; font-size: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); margin: 10px; }
+        .sub-text { font-size: 1.2rem; color: #ad1457; margin-bottom: 30px; font-weight: bold; }
+
+        /* Advanced Slider */
+        .slider-wrapper { width: 90%; max-width: 600px; position: relative; background: white; padding: 10px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .slider-container { width: 100%; height: 400px; overflow: hidden; border-radius: 15px; position: relative; background: #000; }
+        .slide { display: none; width: 100%; height: 100%; object-fit: contain; }
+        
+        .caption-box { min-height: 80px; display: flex; align-items: center; justify-content: center; padding: 15px; }
+        .caption { font-size: 1.1rem; font-style: italic; color: #880e4f; font-weight: 600; line-height: 1.4; }
+
+        /* Animations */
+        .petal { position: fixed; top: -10%; z-index: 999; pointer-events: none; animation: fall linear infinite; }
+        @keyframes fall { 0% { top: -10%; transform: translateX(0) rotate(0deg); } 100% { top: 110%; transform: translateX(100px) rotate(360deg); } }
+        
+        .controls { margin-top: 15px; display: flex; gap: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="music-control">
+        <button onclick="playMusic()">🎵 Play Music</button>
+    </div>
+    <audio id="bdayMusic" loop><source src="birthday_song.mp3" type="audio/mpeg"></audio>
+
+    <!-- Section 1: Intro -->
+    <section class="page" id="home">
+        <h1>Happy Birthday <br> Chama Thakur! 🎂</h1>
+        <p class="sub-text">9th March — The Day a Queen Was Born 👑</p>
+        <button onclick="scrollToId('memories')">Start the Journey 👇</button>
+    </section>
+
+    <!-- Section 2: Big Slider (10 Photos + 5 Videos) -->
+    <section class="page" id="memories">
+        <h2 style="color: #d81b60;">Our Beautiful Memories ✨</h2>
+        <div class="slider-wrapper">
+            <div class="slider-container">
+                <!-- 10 Photos -->
+                <img class="slide" src="p1.jpg"> <img class="slide" src="p2.jpg">
+                <img class="slide" src="p3.jpg"> <img class="slide" src="p4.jpg">
+                <img class="slide" src="p5.jpg"> <img class="slide" src="p6.jpg">
+                <img class="slide" src="p7.jpg"> <img class="slide" src="p8.jpg">
+                <img class="slide" src="p9.jpg"> <img class="slide" src="p10.jpg">
+                <!-- 5 Videos -->
+                <video class="slide" controls><source src="v1.mp4" type="video/mp4"></video>
+                <video class="slide" controls><source src="v2.mp4" type="video/mp4"></video>
+                <video class="slide" controls><source src="v3.mp4" type="video/mp4"></video>
+                <video class="slide" controls><source src="v4.mp4" type="video/mp4"></video>
+                <video class="slide" controls><source src="v5.mp4" type="video/mp4"></video>
+            </div>
+            <div class="caption-box">
+                <div id="caption-text" class="caption">Tareef is loading...</div>
+            </div>
+        </div>
+        <div class="controls">
+            <button onclick="changeSlide(-1)">❮ Back</button>
+            <button onclick="changeSlide(1)">Next ❯</button>
+        </div>
+        <button style="margin-top: 40px; background: #880e4f;" onclick="scrollToId('final')">A Special Note ❤️</button>
+    </section>
+
+    <!-- Section 3: Final Wish -->
+    <section class="page" id="final">
+        <h1>For You, Chama ❤️</h1>
+        <p class="caption" style="font-size: 1.3rem; max-width: 80%;">
+            "Aapki hasee se duniya roshan hoti hai, Thakur Sahiba. <br> 
+            Ye saal aapki zindagi ka sabse behtareen saal ho. <br>
+           Wo bahut hi lucky insaan hoga jiski life me aap hogi!"
+        </p>
+        <p style="color: #d81b60; font-weight: bold; font-size: 1.5rem;">Happy Birthday Once Again! 🥳</p>
+        <button onclick="scrollToId('home')">Restart ⬆️</button>
+    </section>
+
+    <script>
+        function playMusic() { document.getElementById("bdayMusic").play(); }
+        function scrollToId(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+        function createPetals() {
+            const icons = ['🌸', '💖', '✨', '🌹', '🦋'];
+            for (let i = 0; i < 40; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                petal.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                petal.style.opacity = Math.random();
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(petal);
+            }
+        }
+
+        let slideIndex = 0;
+        const compliments = [
+            "Chama, aapki smile duniya ki sabse pyari cheez hai! 😊",
+            "Aap har photo mein ek angel ki tarah lagti ho. ✨",
+            "Thakur Sahiba ka andaaz hi sabse juda hai! 👑",
+            "Aapki aankhon mein ek aisi chamak hai jo sabko khush kar deti hai. 👁️✨",
+            "Saadgi mein bhi aap qayamat lagti ho! 🌸",
+            "Aapka dil aapke chehre se bhi zyada khoobsurat hai. ❤️",
+            "Chama, aap jaisa koi aur ho hi nahi sakta. Unique! 🦋",
+            "Aapki ek jhalak hi din banane ke liye kaafi hai. ☀️",
+            "Best personality with the best soul – That's You! 🌟",
+            "Aapki har ada mein ek alag hi grace hai. 💃",
+            "Video Memory: Chama, aapka naam jitna pyaara hai, usse bhi kahin zyada pyaari aap ho. ✨🎥❤️",
+            "Bhagwan ne fursat mein banaya hoga aapko, har feature ekdum perfect hai. 🎨",
+            "Thakur Sahiba, aapki baaton mein ek alag hi mithas hai. 🍬",
+            "Keep shining like a star, Chama! Always. 🌟",
+            "Last but not least, aap sabse best ho! Happy Birthday! 🎂🥳"
+        ];
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slide");
+            let captionDiv = document.getElementById("caption-text");
+            if (n >= slides.length) slideIndex = 0;
+            if (n < 0) slideIndex = slides.length - 1;
+            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slides[slideIndex].style.display = "block";
+            captionDiv.innerHTML = compliments[slideIndex];
+        }
+
+        function changeSlide(n) { showSlides(slideIndex += n); }
+
+        window.onload = function() { createPetals(); showSlides(slideIndex); };
+    </script>
+</body>
+</html>
